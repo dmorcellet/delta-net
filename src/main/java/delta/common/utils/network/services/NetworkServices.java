@@ -38,34 +38,34 @@ public final class NetworkServices
 
   public ServiceInfo getServiceByName(String serviceName)
   {
-    ServiceInfo service_l=null;
+    ServiceInfo service=null;
     int nb=_serviceRegistries.size();
     NetworkServicesRegistry register;
     for(int i=0;i<nb;i++)
     {
       register=_serviceRegistries.get(i);
-      service_l=register.getService(serviceName);
-      if (service_l!=null)
+      service=register.getService(serviceName);
+      if (service!=null)
       {
         break;
       }
     }
-    return service_l;
+    return service;
   }
 
   private void parserServiceFiles()
   {
-    ServicesFileReader reader_l=new ServicesFileReader();
-    NetworkServicesRegistry register_l=null;
+    ServicesFileReader reader=new ServicesFileReader();
+    NetworkServicesRegistry register=null;
     Configuration cfg=Configurations.getConfiguration();
     File path=cfg.getFileValue("NETWORK","SERVICES",null);
     if (path!=null)
     {
-      register_l=reader_l.parseServices(path);
+      register=reader.parseServices(path);
     }
-    if (register_l!=null)
+    if (register!=null)
     {
-      _serviceRegistries.add(register_l);
+      _serviceRegistries.add(register);
     }
     else
     {

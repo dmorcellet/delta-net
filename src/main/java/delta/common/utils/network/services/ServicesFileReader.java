@@ -32,31 +32,31 @@ public class ServicesFileReader
     TextFileReader parser=new TextFileReader(filename);
     if (!parser.start()) return null;
 
-    NetworkServicesRegistry return_l=new NetworkServicesRegistry();
-    ServiceInfo location_l=null;
-    String line_l;
-    String serviceName_l;
-    String hostName_l;
-    String portStr_l;
-    short portNumber_l;
+    NetworkServicesRegistry ret=new NetworkServicesRegistry();
+    ServiceInfo location=null;
+    String line;
+    String serviceName;
+    String hostName;
+    String portStr;
+    short portNumber;
     while(true)
     {
-      line_l=parser.getNextLine();
-      if (line_l==null) break;
-      if (line_l.startsWith(COMMENT_PREFIX)) continue;
-      serviceName_l="";
-      hostName_l=null;
-      portNumber_l=-1;
-      StringTokenizer st=new StringTokenizer(line_l,SEPARATORS);
-      if (st.hasMoreTokens()) serviceName_l=st.nextToken(); else continue;
-      if (st.hasMoreTokens()) portStr_l=st.nextToken(); else continue;
-      try { portNumber_l=Short.parseShort(portStr_l); }
+      line=parser.getNextLine();
+      if (line==null) break;
+      if (line.startsWith(COMMENT_PREFIX)) continue;
+      serviceName="";
+      hostName=null;
+      portNumber=-1;
+      StringTokenizer st=new StringTokenizer(line,SEPARATORS);
+      if (st.hasMoreTokens()) serviceName=st.nextToken(); else continue;
+      if (st.hasMoreTokens()) portStr=st.nextToken(); else continue;
+      try { portNumber=Short.parseShort(portStr); }
       catch(NumberFormatException nfe) { continue; }
-      if (st.hasMoreTokens()) hostName_l=st.nextToken();
-      location_l=new ServiceInfo(serviceName_l,hostName_l,portNumber_l);
-      return_l.addServiceInfo(location_l);
+      if (st.hasMoreTokens()) hostName=st.nextToken();
+      location=new ServiceInfo(serviceName,hostName,portNumber);
+      ret.addServiceInfo(location);
     }
     parser.terminate();
-    return return_l;
+    return ret;
   }
 }

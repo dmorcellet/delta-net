@@ -59,8 +59,8 @@ public class SocketClient
       {
         _logger.info("Trying to connect to "+_serviceLocation);
         Socket socket=new Socket();
-        SocketAddress sockAddr_l=new InetSocketAddress(_serviceLocation.getHostName(), _serviceLocation.getPort());
-        socket.connect(sockAddr_l,getConnectionTimeout());
+        SocketAddress sockAddr=new InetSocketAddress(_serviceLocation.getHostName(), _serviceLocation.getPort());
+        socket.connect(sockAddr,getConnectionTimeout());
         _logger.info("OK !");
         doConfigureSocket(socket);
         _socket=socket;

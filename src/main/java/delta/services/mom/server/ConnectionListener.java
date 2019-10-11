@@ -19,12 +19,12 @@ public class ConnectionListener implements Runnable
 
   /**
    * Standard constructor.
-   * @param port_p Port to listen to.
+   * @param port Port to listen to.
    */
-  public ConnectionListener(int port_p)
+  public ConnectionListener(int port)
   {
     _isRunning=false;
-    _port=port_p;
+    _port=port;
   }
 
   private void startListening()
@@ -68,9 +68,9 @@ public class ConnectionListener implements Runnable
     // Waiting for a connection
     try
     {
-      Socket clientSocket_l=_listeningSocket.accept();
+      Socket clientSocket=_listeningSocket.accept();
       _logger.info("Server on port "+_port+" handles a new connection...");
-      doConnectionClient(clientSocket_l);
+      doConnectionClient(clientSocket);
     }
     catch(Throwable t)
     {
