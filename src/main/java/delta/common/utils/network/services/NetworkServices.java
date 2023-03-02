@@ -8,11 +8,10 @@ import org.apache.log4j.Logger;
 
 import delta.common.utils.configuration.Configuration;
 import delta.common.utils.configuration.Configurations;
-import delta.common.utils.traces.UtilsLoggers;
 
 public final class NetworkServices
 {
-  private static final Logger _logger=UtilsLoggers.getUtilsLogger();
+  private static final Logger LOGGER=Logger.getLogger(NetworkServices.class);
 
   private static NetworkServices _instance;
 
@@ -69,7 +68,7 @@ public final class NetworkServices
     }
     else
     {
-      _logger.error("Could not parse service file !");
+      LOGGER.error("Could not parse service file !");
     }
   }
 }

@@ -11,11 +11,11 @@ import org.apache.log4j.Logger;
 
 import delta.common.utils.network.services.NetworkServices;
 import delta.common.utils.network.services.ServiceInfo;
-import delta.common.utils.traces.UtilsLoggers;
 
 public class SocketClient
 {
-  private static final Logger _logger=UtilsLoggers.getServicesLogger();
+  private static final Logger LOGGER=Logger.getLogger(SocketClient.class);
+
   private ServiceInfo _serviceLocation;
   private Socket _socket;
 
@@ -26,7 +26,7 @@ public class SocketClient
   public SocketClient(String serviceName)
   {
     _serviceLocation=NetworkServices.getInstance().getServiceByName(serviceName);
-    _logger.info("New socket client for Service ["+_serviceLocation+"]");
+    LOGGER.info("New socket client for Service ["+_serviceLocation+"]");
   }
 
   /**
@@ -37,7 +37,7 @@ public class SocketClient
   public SocketClient(String hostName, short port)
   {
     _serviceLocation=new ServiceInfo("UNKNOWN",hostName,port);
-    _logger.info("New socket client for Service ["+_serviceLocation+"]");
+    LOGGER.info("New socket client for Service ["+_serviceLocation+"]");
   }
 
   /**
@@ -47,7 +47,7 @@ public class SocketClient
   public SocketClient(ServiceInfo location)
   {
     _serviceLocation=location;
-    _logger.info("New socket client for Service ["+_serviceLocation+"]");
+    LOGGER.info("New socket client for Service ["+_serviceLocation+"]");
   }
 
   public boolean connect()
@@ -57,18 +57,18 @@ public class SocketClient
     {
       try
       {
-        _logger.info("Trying to connect to "+_serviceLocation);
+        LOGGER.info("Trying to connect to "+_serviceLocation);
         Socket socket=new Socket();
         SocketAddress sockAddr=new InetSocketAddress(_serviceLocation.getHostName(), _serviceLocation.getPort());
         socket.connect(sockAddr,getConnectionTimeout());
-        _logger.info("OK !");
+        LOGGER.info("OK !");
         doConfigureSocket(socket);
         _socket=socket;
         ret=true;
       }
       catch(IOException ioe)
       {
-        _logger.error("Cannot connect !",ioe);
+        LOGGER.error("Cannot connect !",ioe);
         ret=false;
       }
     }
@@ -87,7 +87,7 @@ public class SocketClient
     }
     catch (IOException ioe)
     {
-      _logger.error("Error during socket closing.",ioe);
+      LOGGER.error("Error during socket closing.",ioe);
     }
     _socket=null;
   }
@@ -124,7 +124,7 @@ public class SocketClient
     }
     catch(IOException ioe)
     {
-      _logger.error("Cannot get input stream for socket !",ioe);
+      LOGGER.error("Cannot get input stream for socket !",ioe);
     }
     return ret;
   }
@@ -138,7 +138,7 @@ public class SocketClient
     }
     catch(IOException ioe)
     {
-      _logger.error("Cannot get output stream for socket !",ioe);
+      LOGGER.error("Cannot get output stream for socket !",ioe);
     }
     return ret;
   }

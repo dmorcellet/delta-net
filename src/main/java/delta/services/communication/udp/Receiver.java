@@ -7,12 +7,11 @@ import java.net.SocketException;
 
 import org.apache.log4j.Logger;
 
-import delta.common.utils.traces.UtilsLoggers;
 import delta.services.communication.Message;
 
 public class Receiver
 {
-  private static final Logger _logger=UtilsLoggers.getServicesLogger();
+  private static final Logger LOGGER=Logger.getLogger(Receiver.class);
 
   private DatagramSocket _socket;
   private DatagramPacket _packet;
@@ -48,7 +47,7 @@ public class Receiver
     }
     catch(SocketException soe)
     {
-      _logger.error("",soe);
+      LOGGER.error("",soe);
     }
     return ret;
   }
@@ -89,7 +88,7 @@ public class Receiver
       }
       catch(IOException ioe)
       {
-        _logger.error("",ioe);
+        LOGGER.error("",ioe);
         stop();
       }
     }
@@ -106,7 +105,7 @@ public class Receiver
     }
     catch(IOException ioe)
     {
-      _logger.error("",ioe);
+      LOGGER.error("",ioe);
     }
   }
 }

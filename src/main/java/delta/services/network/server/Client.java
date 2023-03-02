@@ -15,11 +15,9 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
-import delta.common.utils.traces.UtilsLoggers;
-
 public class Client
 {
-  private static final Logger _logger=UtilsLoggers.getServicesLogger();
+  private static final Logger LOGGER=Logger.getLogger(Client.class);
 
   private Socket _socket;
   private InputStream _inputStream;
@@ -46,7 +44,7 @@ public class Client
       }
       catch(IOException ioException)
       {
-        _logger.error("",ioException);
+        LOGGER.error("",ioException);
       }
     }
     return _inputStream;
@@ -89,7 +87,7 @@ public class Client
       }
       catch(IOException ioException)
       {
-        _logger.error("",ioException);
+        LOGGER.error("",ioException);
       }
     }
     return _outputStream;

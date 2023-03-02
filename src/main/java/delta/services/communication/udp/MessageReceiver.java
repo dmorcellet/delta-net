@@ -5,13 +5,12 @@ import java.util.BitSet;
 
 import org.apache.log4j.Logger;
 
-import delta.common.utils.traces.UtilsLoggers;
 import delta.services.communication.Message;
 import delta.services.communication.MessageHeader;
 
 public class MessageReceiver
 {
-  private static final Logger _logger=UtilsLoggers.getServicesLogger();
+  private static final Logger LOGGER=Logger.getLogger(MessageReceiver.class);
   private Message _message;
   private MessageHeader _messageHeader;
   private FractionHeader _fractionHeader;
@@ -48,7 +47,7 @@ public class MessageReceiver
     int fractionID=_fractionHeader.getFractionID();
     if (_receivedFractions.get(fractionID))
     {
-      _logger.error("Already received fraction "+fractionID+" for message "+_messageHeader.getMessageID());
+      LOGGER.error("Already received fraction "+fractionID+" for message "+_messageHeader.getMessageID());
     }
     else
     {

@@ -7,11 +7,9 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
-import delta.common.utils.traces.UtilsLoggers;
-
 public class ConnectionListener implements Runnable
 {
-  private static final Logger _logger=UtilsLoggers.getServicesLogger();
+  private static final Logger LOGGER=Logger.getLogger(ConnectionListener.class);
 
   private ServerSocket _listeningSocket;
   private boolean _isRunning;
@@ -33,16 +31,16 @@ public class ConnectionListener implements Runnable
     try
     {
       _listeningSocket=new ServerSocket(_port);
-      _logger.info("Service at port : " + _port + " has started ...");
+      LOGGER.info("Service at port : " + _port + " has started ...");
       _isRunning=true;
     }
     catch(BindException bindException)
     {
-      _logger.error("Cannot create server socket. Bind error !", bindException);
+      LOGGER.error("Cannot create server socket. Bind error !", bindException);
     }
     catch (IOException ioe)
     {
-      _logger.error("Cannot create server socket. I/O error", ioe);
+      LOGGER.error("Cannot create server socket. I/O error", ioe);
     }
   }
 
@@ -59,7 +57,7 @@ public class ConnectionListener implements Runnable
     }
     catch (Exception exception)
     {
-      _logger.error("",exception);
+      LOGGER.error("",exception);
     }
   }
 
@@ -69,12 +67,12 @@ public class ConnectionListener implements Runnable
     try
     {
       Socket clientSocket=_listeningSocket.accept();
-      _logger.info("Server on port "+_port+" handles a new connection...");
+      LOGGER.info("Server on port "+_port+" handles a new connection...");
       doConnectionClient(clientSocket);
     }
     catch(Throwable t)
     {
-      _logger.error("Cannot handle new client !",t);
+      LOGGER.error("Cannot handle new client !",t);
     }
   }
 
@@ -92,7 +90,7 @@ public class ConnectionListener implements Runnable
     {
       waitForClientConnection();
     }
-    _logger.info("End of connection listener !");
+    LOGGER.info("End of connection listener !");
     stop();
   }
 

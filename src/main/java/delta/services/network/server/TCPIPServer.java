@@ -6,11 +6,9 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
-import delta.common.utils.traces.UtilsLoggers;
-
 public class TCPIPServer
 {
-  private static final Logger _logger=UtilsLoggers.getServicesLogger();
+  private static final Logger LOGGER=Logger.getLogger(TCPIPServer.class);
 
   private ServerSocket _serverSocket;
   private short _port;
@@ -31,7 +29,7 @@ public class TCPIPServer
     }
     catch(IOException ioException)
     {
-      _logger.error("",ioException);
+      LOGGER.error("",ioException);
     }
   }
 
@@ -56,7 +54,7 @@ public class TCPIPServer
       }
       catch(IOException ioException)
       {
-        _logger.error("",ioException);
+        LOGGER.error("",ioException);
       }
       if(s!=null)
       {
