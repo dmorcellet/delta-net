@@ -10,12 +10,20 @@ import java.util.Stack;
 import delta.services.communication.Message;
 import delta.services.communication.MessageHeader;
 
+/**
+ * Manager for message receivers.
+ * @author DAM
+ */
 public class MessageReceiverManager
 {
   private HashMap<MessageHeader,MessageReceiver> _messageReceivers;
   private Stack<MessageReceiver> _availableMessageReceivers;
   private MessageHeader _header;
 
+  /**
+   * Constructor.
+   * @param poolSize Maximum number of messages simultaneously received.
+   */
   public MessageReceiverManager(int poolSize)
   {
     _messageReceivers=new HashMap<MessageHeader,MessageReceiver>(poolSize);
@@ -41,6 +49,10 @@ public class MessageReceiverManager
     return ret;
   }
 
+  /**
+   * Get the number of active receivers.
+   * @return a receivers count.
+   */
   public int getNumberOfActiveReceivers()
   {
     return _messageReceivers.size();
@@ -76,10 +88,14 @@ public class MessageReceiverManager
     return (fraction.getData().length>=Constants.MIN_DATA_SIZE_IN_FRACTION);
   }
 
+  /**
+   * Handle an incoming fraction.
+   * @param fraction Received fraction.
+   * @return A <code>Message</code> if a message was fully received, <code>null</code> otherwise.
+   */
   public Message handleFraction(DatagramPacket fraction)
   {
     Message ret=null;
-    //System.out.println("Received packet.");
     if (checkFraction(fraction))
     {
       MessageReceiver receiver=getReceiver(fraction);
@@ -90,10 +106,12 @@ public class MessageReceiverManager
         _availableMessageReceivers.push(receiver);
       }
     }
-    //dumpState();
     return ret;
   }
 
+  /**
+   * Dump the current state of this manager.
+   */
   public void dumpState()
   {
     System.out.println("Active receivers : "+getNumberOfActiveReceivers());

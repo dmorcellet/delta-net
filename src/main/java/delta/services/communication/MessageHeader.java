@@ -4,10 +4,17 @@ import java.net.InetSocketAddress;
 
 import delta.common.utils.Bits;
 
-public class MessageHeader extends Object
+/**
+ * Message header.
+ * @author dm
+ */
+public class MessageHeader
 {
   private static final int DEFAULT_PORT=1000;
   private static final InetSocketAddress DEFAULT_ADDRESS=new InetSocketAddress("localhost", DEFAULT_PORT);
+  /**
+   * Size of a message header.
+   */
   public static final int SIZE=(4+2)*2+4+4+1;
   // Emitter
   private byte[] _emitterAddress;
@@ -22,6 +29,10 @@ public class MessageHeader extends Object
 
   private byte[] _header;
 
+  /**
+   * Copy constructor.
+   * @param header Source header.
+   */
   public MessageHeader(MessageHeader header)
   {
     init();
@@ -29,6 +40,9 @@ public class MessageHeader extends Object
     buildFromBytes();
   }
 
+  /**
+   * Constructor.
+   */
   public MessageHeader()
   {
     init();
@@ -43,38 +57,65 @@ public class MessageHeader extends Object
     _header=new byte[SIZE];
   }
 
+  /**
+   * Set the sender.
+   * @param sender IP/port to set for the sender.
+   */
   public void setSender(InetSocketAddress sender)
   {
     _emitterAddress=sender.getAddress().getAddress();
     _emitterPort=(short)sender.getPort();
   }
 
+  /**
+   * Set the receiver.
+   * @param receiver IP/port to set for the receiver.
+   */
   public void setReceiver(InetSocketAddress receiver)
   {
     _receiverAddress=receiver.getAddress().getAddress();
     _receiverPort=(short)receiver.getPort();
   }
 
+  /**
+   * Get the message identifier.
+   * @return a message identifier.
+   */
   public int getMessageID()
   {
     return _messageID;
   }
 
+  /**
+   * Set the message identifier.
+   * @param id Identifier to set.
+   */
   public void setMessageID(int id)
   {
     _messageID=id;
   }
 
+  /**
+   * Get the message (payload) size.
+   * @return A size.
+   */
   public int getMessageSize()
   {
     return _messageSize;
   }
 
+  /**
+   * Set the message (payload) size.
+   * @param size Size in bytes.
+   */
   public void setMessageSize(int size)
   {
     _messageSize=size;
   }
 
+  /**
+   * Build header buffer from object attributes.
+   */
   public void buildBytes()
   {
     int n=0;
@@ -93,6 +134,9 @@ public class MessageHeader extends Object
     _header[n]=_priority;
   }
 
+  /**
+   * Setup object attributes from header buffer.
+   */
   public void buildFromBytes()
   {
     int n=0;
@@ -111,6 +155,10 @@ public class MessageHeader extends Object
     _priority=_header[n];
   }
 
+  /**
+   * Get the header buffer.
+   * @return A bytes buffer.
+   */
   public byte[] getBytes()
   {
     return _header;

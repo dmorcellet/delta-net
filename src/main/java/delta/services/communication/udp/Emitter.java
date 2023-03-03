@@ -6,12 +6,19 @@ import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
 
+/**
+ * Packet emitter.
+ * @author DAM
+ */
 public class Emitter
 {
   private DatagramSocket _socket;
   private DatagramPacket _packet;
   private DatagramPacket _ackPacket;
 
+  /**
+   * Constructor.
+   */
   public Emitter()
   {
     try
@@ -27,11 +34,21 @@ public class Emitter
     }
   }
 
+  /**
+   * Get the local address for this emitter.
+   * @return An IP address.
+   */
   public InetSocketAddress getLocalAddress()
   {
     return(InetSocketAddress)_socket.getLocalSocketAddress();
   }
 
+  /**
+   * Send a packet.
+   * @param target IP/port to send to.
+   * @param packet Packet to send.
+   * @param packetSize Packet size.
+   */
   public synchronized void send(InetSocketAddress target, byte[] packet, int packetSize)
   {
     _packet.setSocketAddress(target);
@@ -48,6 +65,9 @@ public class Emitter
     }
   }
 
+  /**
+   * Receive an acknowledge for a packet.
+   */
   public void receiveAcknowledge()
   {
     try

@@ -5,6 +5,10 @@ import java.net.InetSocketAddress;
 import delta.services.communication.Message;
 import delta.services.communication.MessageHeader;
 
+/**
+ * Message sender.
+ * @author DAM
+ */
 public class MessageSender
 {
   private byte[] _buffer;
@@ -13,6 +17,11 @@ public class MessageSender
   private Emitter _emitter;
   private int _counter;
 
+  /**
+   * Constructor.
+   * @param target Target.
+   * @param emitter Data emitter.
+   */
   public MessageSender(InetSocketAddress target, Emitter emitter)
   {
     _buffer=new byte[Constants.MAX_PACKET_SIZE];
@@ -22,6 +31,10 @@ public class MessageSender
     _counter=0;
   }
 
+  /**
+   * Send a message.
+   * @param m Message to send.
+   */
   public void sendMessage(Message m)
   {
     _counter++;

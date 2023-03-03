@@ -9,6 +9,10 @@ import org.apache.log4j.Logger;
 
 import delta.services.communication.Message;
 
+/**
+ * Packet receiver.
+ * @author DAM
+ */
 public class Receiver
 {
   private static final Logger LOGGER=Logger.getLogger(Receiver.class);
@@ -20,11 +24,20 @@ public class Receiver
   private boolean _isStarted;
   private MessageReceiverManager _receiversManager;
 
+  /**
+   * Constructor.
+   * @param port Port to listen to.
+   */
   public Receiver(int port)
   {
     this(port, Constants.MAX_PACKET_SIZE);
   }
 
+  /**
+   * Constructor.
+   * @param port Port to listen to.
+   * @param maxPacketSize Maximum packet size.
+   */
   public Receiver(int port, int maxPacketSize)
   {
     _port=port;
@@ -35,6 +48,10 @@ public class Receiver
     _receiversManager=new MessageReceiverManager(1000);
   }
 
+  /**
+   * Start the reception loop.
+   * @return <code>true</code> if it succeeded, <code>false</code> otherwise.
+   */
   public synchronized boolean start()
   {
     boolean ret=false;
@@ -52,6 +69,9 @@ public class Receiver
     return ret;
   }
 
+  /**
+   * Stop the reception loop (from another thread).
+   */
   public synchronized void stop()
   {
     if(_socket!=null)
@@ -62,7 +82,10 @@ public class Receiver
     }
   }
 
-  public void receivePackets()
+  /**
+   * Receive packets.
+   */
+  private void receivePackets()
   {
     while(true)
     {
@@ -70,7 +93,11 @@ public class Receiver
     }
   }
 
-  public synchronized boolean receivePacket()
+  /**
+   * Receive a single packet.
+   * @return <code>true</code> if it succeeded, <code>false</code> otherwise.
+   */
+  private synchronized boolean receivePacket()
   {
     boolean ret=false;
     if(_isStarted)

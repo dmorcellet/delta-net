@@ -8,6 +8,10 @@ import org.apache.log4j.Logger;
 import delta.services.communication.Message;
 import delta.services.communication.MessageHeader;
 
+/**
+ * Message receiver.
+ * @author DAM
+ */
 public class MessageReceiver
 {
   private static final Logger LOGGER=Logger.getLogger(MessageReceiver.class);
@@ -16,6 +20,9 @@ public class MessageReceiver
   private FractionHeader _fractionHeader;
   private BitSet _receivedFractions;
 
+  /**
+   * Constructor.
+   */
   public MessageReceiver()
   {
     _messageHeader=new MessageHeader();
@@ -28,14 +35,17 @@ public class MessageReceiver
     _receivedFractions.clear();
   }
 
+  /**
+   * Decode a fraction.
+   * @param packet Input packet.
+   * @return A <code>Message</code> if a message was fully received, <code>null</code> otherwise.
+   */
   public Message decodeFraction(DatagramPacket packet)
   {
     Message ret=null;
     byte[] data=packet.getData();
-    System.arraycopy(data,Constants.MESSAGE_HEADER_OFFSET,_messageHeader
-        .getBytes(),0,MessageHeader.SIZE);
-    System.arraycopy(data,Constants.FRACTION_HEADER_OFFSET,_fractionHeader
-        .getBytes(),0,FractionHeader.SIZE);
+    System.arraycopy(data,Constants.MESSAGE_HEADER_OFFSET,_messageHeader.getBytes(),0,MessageHeader.SIZE);
+    System.arraycopy(data,Constants.FRACTION_HEADER_OFFSET,_fractionHeader.getBytes(),0,FractionHeader.SIZE);
     _messageHeader.buildFromBytes();
     int messageSize=_messageHeader.getMessageSize();
     int nbFractions=Constants.getNumberOfFractions(messageSize);
@@ -53,10 +63,8 @@ public class MessageReceiver
     {
       int fractionSize=packet.getLength()-Constants.MIN_DATA_SIZE_IN_FRACTION;
       int offset=fractionID*Constants.MAX_DATA_SIZE_IN_FRACTION;
-      System.arraycopy(data,Constants.MIN_DATA_SIZE_IN_FRACTION,_message
-          .getData(),offset,fractionSize);
+      System.arraycopy(data,Constants.DATA_OFFSET,_message.getData(),offset,fractionSize);
       _receivedFractions.set(fractionID);
-      //System.out.println("Fraction fID="+fractionID);
     }
     if (_receivedFractions.cardinality()==nbFractions)
     {
