@@ -3,11 +3,15 @@ package delta.services.mom.client;
 import delta.common.utils.Tools;
 import delta.services.mom.common.TestConstants;
 
+/**
+ * Socket client for tests.
+ * @author DAM
+ */
 public class MainTestSocketClient
 {
   /**
    * Main method for this test.
-   * @param args None usefull.
+   * @param args None useful.
    */
   public static void main(String[] args)
   {

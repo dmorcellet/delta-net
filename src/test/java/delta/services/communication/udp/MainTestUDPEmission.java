@@ -6,6 +6,10 @@ import org.apache.log4j.Logger;
 
 import delta.services.communication.Message;
 
+/**
+ * Test UDP emission.
+ * @author DAM
+ */
 public class MainTestUDPEmission
 {
   private static final Logger LOGGER=Logger.getLogger(MainTestUDPEmission.class);

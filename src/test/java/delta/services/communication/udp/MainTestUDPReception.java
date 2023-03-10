@@ -1,6 +1,9 @@
 package delta.services.communication.udp;
 
-
+/**
+ * Test UDP reception.
+ * @author DAM
+ */
 public class MainTestUDPReception
 {
   private static void run()

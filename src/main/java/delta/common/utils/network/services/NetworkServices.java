@@ -9,6 +9,10 @@ import org.apache.log4j.Logger;
 import delta.common.utils.configuration.Configuration;
 import delta.common.utils.configuration.Configurations;
 
+/**
+ * Facade for the network services registry.
+ * @author DAM
+ */
 public final class NetworkServices
 {
   private static final Logger LOGGER=Logger.getLogger(NetworkServices.class);
@@ -17,6 +21,10 @@ public final class NetworkServices
 
   private List<NetworkServicesRegistry> _serviceRegistries;
 
+  /**
+   * Get the sole instance of this class.
+   * @return the sole instance of this class.
+   */
   public static NetworkServices getInstance()
   {
     synchronized (NetworkServices.class)
@@ -35,6 +43,11 @@ public final class NetworkServices
     parserServiceFiles();
   }
 
+  /**
+   * Get a service description using its name.
+   * @param serviceName Name of the service to use.
+   * @return A description or <code>null</code> if not found.
+   */
   public ServiceInfo getServiceByName(String serviceName)
   {
     ServiceInfo service=null;

@@ -5,6 +5,10 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 
+/**
+ * Test class for UDP messaging.
+ * @author DAM
+ */
 public class MainTestUDP
 {
   private static final int PORT=8000;
@@ -12,11 +16,18 @@ public class MainTestUDP
   private static final int DATAGRAM_SIZE=10;
   private boolean _emitter;
 
+  /**
+   * Constructor.
+   * @param emitter Run as an emitter or as a receiver.
+   */
   public MainTestUDP(boolean emitter)
   {
     _emitter=emitter;
   }
 
+  /**
+   * Run.
+   */
   public void run()
   {
     if(_emitter)
@@ -29,6 +40,9 @@ public class MainTestUDP
     }
   }
 
+  /**
+   * Run the emitter.
+   */
   public void runEmitter()
   {
     try
@@ -53,6 +67,9 @@ public class MainTestUDP
     }
   }
 
+  /**
+   * Run the receiver.
+   */
   public void runReceiver()
   {
     try
