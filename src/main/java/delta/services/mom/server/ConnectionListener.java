@@ -7,6 +7,10 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Listener for incoming connections.
+ * @author DAM
+ */
 public class ConnectionListener implements Runnable
 {
   private static final Logger LOGGER=Logger.getLogger(ConnectionListener.class);
@@ -16,7 +20,7 @@ public class ConnectionListener implements Runnable
   private int _port;
 
   /**
-   * Standard constructor.
+   * Constructor.
    * @param port Port to listen to.
    */
   public ConnectionListener(int port)
@@ -44,6 +48,9 @@ public class ConnectionListener implements Runnable
     }
   }
 
+  /**
+   * Stop listening.
+   */
   public void stop()
   {
     try

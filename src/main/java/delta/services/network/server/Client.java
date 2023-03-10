@@ -15,6 +15,10 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Client.
+ * @author DAM
+ */
 public class Client
 {
   private static final Logger LOGGER=Logger.getLogger(Client.class);
@@ -50,6 +54,10 @@ public class Client
     return _inputStream;
   }
 
+  /**
+   * Get the input stream.
+   * @return the input stream.
+   */
   public BufferedInputStream getBufferedInputStream()
   {
     if(_bufferedInputStream==null)
@@ -59,6 +67,10 @@ public class Client
     return _bufferedInputStream;
   }
 
+  /**
+   * Get the data input stream.
+   * @return the data input stream.
+   */
   public DataInputStream getDataInputStream()
   {
     if(_dataInputStream==null)
@@ -68,6 +80,10 @@ public class Client
     return _dataInputStream;
   }
 
+  /**
+   * Get the buffered reader.
+   * @return the buffered reader.
+   */
   public BufferedReader getBufferedReader()
   {
     if(_bufferedReader==null)
@@ -93,6 +109,10 @@ public class Client
     return _outputStream;
   }
 
+  /**
+   * Get the buffered output stream.
+   * @return the buffered output stream.
+   */
   public BufferedOutputStream getBufferedOutputStream()
   {
     if(_bufferedOutputStream==null)
@@ -102,6 +122,10 @@ public class Client
     return _bufferedOutputStream;
   }
 
+  /**
+   * Get the data output stream.
+   * @return the data output stream.
+   */
   public DataOutputStream getDataOutputStream()
   {
     if(_dataOutputStream==null)
@@ -111,6 +135,10 @@ public class Client
     return _dataOutputStream;
   }
 
+  /**
+   * Get the buffered writer.
+   * @return the buffered writer.
+   */
   public BufferedWriter getBufferedWriter()
   {
     if(_bufferedWriter==null)

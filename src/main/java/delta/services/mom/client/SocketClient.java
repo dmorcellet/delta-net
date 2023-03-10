@@ -12,6 +12,10 @@ import org.apache.log4j.Logger;
 import delta.common.utils.network.services.NetworkServices;
 import delta.common.utils.network.services.ServiceInfo;
 
+/**
+ * Client socket. 
+ * @author DAM
+ */
 public class SocketClient
 {
   private static final Logger LOGGER=Logger.getLogger(SocketClient.class);
@@ -50,6 +54,10 @@ public class SocketClient
     LOGGER.info("New socket client for Service ["+_serviceLocation+"]");
   }
 
+  /**
+   * Connect to the server.
+   * @return <code>true</code> if OK, <code>false</code> otherwise.
+   */
   public boolean connect()
   {
     boolean ret=false;
@@ -92,6 +100,10 @@ public class SocketClient
     _socket=null;
   }
 
+  /**
+   * Get the connection timeout.
+   * @return a duration (ms).
+   */
   public int getConnectionTimeout()
   {
     return 5000;
@@ -115,6 +127,10 @@ public class SocketClient
     // Override to do something usefull.
   }
 
+  /**
+   * Get the input stream.
+   * @return the input stream.
+   */
   public InputStream getInputStream()
   {
     InputStream ret=null;
@@ -129,6 +145,10 @@ public class SocketClient
     return ret;
   }
 
+  /**
+   * Get the output stream.
+   * @return the output stream.
+   */
   public OutputStream getOutputStream()
   {
     OutputStream ret=null;
