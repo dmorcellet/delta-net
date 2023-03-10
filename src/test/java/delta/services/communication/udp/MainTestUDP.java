@@ -45,9 +45,10 @@ public class MainTestUDP
    */
   public void runEmitter()
   {
+    DatagramSocket ds=null;
     try
     {
-      DatagramSocket ds=new DatagramSocket(PORT+1);
+      ds=new DatagramSocket(PORT+1);
       // ou DatagramSocket ds=new DatagramSocket();
       InetSocketAddress addr=new InetSocketAddress(InetAddress.getLocalHost(), PORT);
       for(int i=0;i<NB_DATAGRAMS;i++)
@@ -65,6 +66,13 @@ public class MainTestUDP
     {
       e.printStackTrace();
     }
+    finally
+    {
+      if (ds!=null)
+      {
+        ds.close();
+      }
+    }
   }
 
   /**
@@ -72,9 +80,10 @@ public class MainTestUDP
    */
   public void runReceiver()
   {
+    DatagramSocket ds=null;
     try
     {
-      DatagramSocket ds=new DatagramSocket(PORT);
+      ds=new DatagramSocket(PORT);
       for(int i=0;i<NB_DATAGRAMS;i++)
       {
         byte[] b=new byte[DATAGRAM_SIZE];
@@ -93,6 +102,13 @@ public class MainTestUDP
     catch(Exception e)
     {
       e.printStackTrace();
+    }
+    finally
+    {
+      if (ds!=null)
+      {
+        ds.close();
+      }
     }
   }
 
