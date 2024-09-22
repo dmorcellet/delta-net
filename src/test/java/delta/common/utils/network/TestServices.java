@@ -1,6 +1,8 @@
 package delta.common.utils.network;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import delta.common.utils.network.services.NetworkServices;
 import delta.common.utils.network.services.ServiceInfo;
 
@@ -8,20 +10,14 @@ import delta.common.utils.network.services.ServiceInfo;
  * Services test.
  * @author DAM
  */
-public class TestServices extends TestCase
+@DisplayName("Services test")
+class TestServices
 {
-  /**
-   * Constructor.
-   */
-  public TestServices()
-  {
-    super("Services test");
-  }
-
   /**
    * Test services parsing.
    */
-  public void testServicesParsing()
+  @Test
+  void testServicesParsing()
   {
     ServiceInfo sl=NetworkServices.getInstance().getServiceByName("testService");
     System.out.println("Service : "+sl);
